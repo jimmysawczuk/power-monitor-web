@@ -14,6 +14,8 @@ const config = {
   output: {
     path: path.resolve(__dirname, "public/dist"),
     filename: "[name].js",
+    library: "PowerMonitor",
+    libraryTarget: "window",
   },
   module: {
     rules: [

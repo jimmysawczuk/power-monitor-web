@@ -1,10 +1,10 @@
 [
   {
     "in": "tmpl/index.tmpl",
-    "out": "static/index.html",
+    "out": "public/index.html",
     "format": "html",
     "options": {
-      "minify": true
+      "minify": false
     }
   }
 ]

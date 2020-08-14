@@ -6,6 +6,8 @@ import { distanceInWords } from "date-fns"
 
 import "./main.less"
 
+let baseURL = ""
+
 timeagoFactory.register("local", function (number, index) {
   return [
     ["a moment ago", "in a moment"],
@@ -278,8 +280,12 @@ function setRevision(revision) {
   timeago.render(document.getElementsByTagName("time"))
 }
 
+function setBaseURL(url) {
+  baseURL = url
+}
+
 function update() {
-  fetch("/api/snapshots")
+  fetch(`${baseURL}/api/snapshots`)
     .then((response) => response.json())
     .then((response) => {
       if (
@@ -323,10 +329,11 @@ function update() {
 
 export function startup(window, document, opts) {
   document.addEventListener("DOMContentLoaded", () => {
-    window.setInterval(update, opts.interval)
-    update()
-
     setMonitoringStartTime(opts.startTime)
     setRevision(opts.revision)
+    setBaseURL(opts.baseURL)
+
+    window.setInterval(update, opts.interval)
+    update()
   })
 }

@@ -14,12 +14,14 @@
 	<meta name="application-name" content="Power monitor">
 	<meta name="msapplication-TileColor" content="#333333">
 	<meta name="theme-color" content="#ffffff">
-	<link rel="stylesheet" href="/bin/app.css" type="text/css" />
+	<link rel="stylesheet" href="/dist/main.css" type="text/css" />
 </head>
 <body>
 	<nav class="navbar navbar-default">
 		<div class="logo">
-			<span class="brand"><i class="far fa-battery-bolt"></i></span>
+      <span class="brand">
+        <img src="/img/power-transparent.png" alt="Battery" />
+      </span>
 			<span class="title">Power monitor</span>
 		</div>
 	</nav>
@@ -78,11 +80,12 @@
 		</div>
 	</footer>
 
-	<script src="/bin/app.js" type="text/javascript"></script>
+	<script src="/dist/main.js" type="text/javascript"></script>
 	<script>
     PowerMonitor.startup(window, document, {
       interval: 30000,
-      startTime: {{ now | jsonify }},
+      baseURL: "http://localhost:3000",
+      startTime: {{ now }},
       revision: {{ getJSON "./REVISION.json" }}
     })
   </script>
