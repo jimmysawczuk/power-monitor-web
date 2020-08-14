@@ -1,0 +1,35 @@
+{
+  "type": "git",
+  "dec": "0d09309",
+  "hex": {
+    "short": "0d09309",
+    "full": "0d093098c0fd398a411b1a6ba6e0ea8f6e4f50c0"
+  },
+  "author": {
+    "email": "me@jimmysawczuk.com",
+    "name": "Jimmy Sawczuk"
+  },
+  "date": "2020-01-04T10:04:47-05:00",
+  "message": "Add MustAsset to keep up to date with new go-binary",
+  "tags": [
+    "v1.1.2"
+  ],
+  "branch": "master",
+  "uncommitted": {
+    "added": 0,
+    "deleted": 0,
+    "files": []
+  },
+  "extra": {
+    "branches": [
+      "master"
+    ],
+    "parents": [
+      {
+        "full": "0f7ba2640169f8cec1304c7fc8c5d450108852d1",
+        "short": "0f7ba26"
+      }
+    ],
+    "subject": "Add MustAsset to keep up to date with new go-binary"
+  }
+}
