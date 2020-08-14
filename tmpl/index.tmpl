@@ -69,8 +69,8 @@
 		<div class="container">
 			<div class="col-md-6 bumper">
 				<span id="last-updated" class="text-muted"></span>
-				<span class="divider">&middot;</span>
-				<span id="started" class="text-muted"></span>
+				<!-- <span class="divider">&middot;</span> -->
+				<!-- <span id="started" class="text-muted"></span> -->
 			</div>
 			<div class="col-md-6 text-right bumper">
 				<span id="revision" class="text-muted"></span>
@@ -85,7 +85,7 @@
     PowerMonitor.startup(window, document, {
       interval: 30000,
       baseURL: "http://localhost:3000",
-      startTime: {{ now }},
+      // startTime: {{ now }},
       revision: {{ getJSON "./REVISION.json" }}
     })
   </script>

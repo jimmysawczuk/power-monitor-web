@@ -275,7 +275,7 @@ function setMonitoringStartTime(startTime) {
 function setRevision(revision) {
   document.getElementById(
     "revision",
-  ).innerHTML = `<a href="https://github.com/jimmysawczuk/power-monitor/commit/${revision.hex.full}">rev ${revision.hex.short}</a> &middot; <time datetime="${revision.date}" />`
+  ).innerHTML = `<a href="https://github.com/jimmysawczuk/power-monitor/commit/${revision.hex.full}">rev. ${revision.hex.short}</a> &middot; <time datetime="${revision.date}" />`
 
   timeago.render(document.getElementsByTagName("time"))
 }
@@ -329,7 +329,7 @@ function update() {
 
 export function startup(window, document, opts) {
   document.addEventListener("DOMContentLoaded", () => {
-    setMonitoringStartTime(opts.startTime)
+    // setMonitoringStartTime(opts.startTime)
     setRevision(opts.revision)
     setBaseURL(opts.baseURL)
 
