@@ -324,7 +324,12 @@ function update() {
 
 export function startup(window, document, opts) {
   document.addEventListener("DOMContentLoaded", () => {
-    // setMonitoringStartTime(opts.startTime)
+    fetch(`${baseURL}/api/meta`)
+      .then((response) => response.json())
+      .then((response) => {
+        setMonitoringStartTime(response.startTime)
+      })
+
     setRevision(opts.revision)
     setBaseURL(opts.baseURL)
 
