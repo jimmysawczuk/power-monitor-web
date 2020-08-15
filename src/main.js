@@ -267,12 +267,16 @@ function setMonitoringStartTime(startTime) {
   timeago.render(document.getElementsByTagName("time"))
 }
 
-function setRevision(revision) {
+function setFrontendRevision(revision) {
   document.getElementById(
-    "revision",
-  ).innerHTML = `<a href="https://github.com/jimmysawczuk/power-monitor/commit/${revision.hex.full}">rev. ${revision.hex.short}</a> &middot; <time datetime="${revision.date}" />`
+    "frontend-revision",
+  ).innerHTML = `frontend: <a href="${revision.link}" title="${revision.date}" target="_blank">rev. ${revision.rev}</a>`
+}
 
-  timeago.render(document.getElementsByTagName("time"))
+function setBackendRevision(revision) {
+  document.getElementById(
+    "backend-revision",
+  ).innerHTML = `api: <a href="${revision.link}" title="${revision.date}" target="_blank">${revision.version}-${revision.rev}</a>`
 }
 
 function setBaseURL(url) {
@@ -324,13 +328,19 @@ function update() {
 
 export function startup(window, document, opts) {
   document.addEventListener("DOMContentLoaded", () => {
-    setRevision(opts.revision)
+    setFrontendRevision(opts.frontendRevision)
     setBaseURL(opts.baseURL)
 
     fetch(`${baseURL}/api/meta`)
       .then((response) => response.json())
       .then((response) => {
         setMonitoringStartTime(response.startTime)
+        setBackendRevision({
+          version: response.version,
+          rev: response.revision,
+          link: `https://github.com/jimmysawczuk/power-monitor/commit/${response.revision}`,
+          date: response.revisedDate,
+        })
       })
 
     window.setInterval(update, opts.interval)

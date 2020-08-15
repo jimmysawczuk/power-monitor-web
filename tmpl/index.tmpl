@@ -73,7 +73,9 @@
           <span id="started" class="text-muted"></span>
         </div>
         <div class="panel text-right">
-          <span id="revision" class="text-muted"></span>
+          <span id="frontend-revision" class="text-muted"></span>
+          <span class="divider">&middot;</span>
+          <span id="backend-revision" class="text-muted"></span>
           <span class="divider">&middot;</span>
           <span id="model" class="text-muted"></span>
         </div>
@@ -84,8 +86,14 @@
     <script>
       PowerMonitor.startup(window, document, {
         interval: 30000,
-        baseURL: "",
-        revision: {{ getJSON "REVISION.json" }}
+        baseURL: "http://localhost:3000",
+        frontendRevision: {{ with getJSON "REVISION.json" -}}
+        {
+          rev: {{ index . "hex" "short" }},
+          link: {{ printf "https://github.com/jimmysawczuk/power-monitor-web/commit/%s" (index . "hex" "short") }},
+          date: {{ index . "date" }}
+        }
+        {{- end }}
       })
     </script>
   </body>
