@@ -3,17 +3,18 @@ const cors = require("cors")
 const fetch = require("node-fetch")
 const app = express()
 const port = 3000
+const baseURL = process.env.BASE_URL
 
 app.use(cors())
 
 app.get("/api/snapshots", (req, res) => {
-  fetch("https://powertop.home.jimmysawczuk.net/api/snapshots")
+  fetch(`${baseURL}/api/snapshots`)
     .then((response) => response.json())
     .then((response) => res.send(response))
 })
 
 app.get("/api/meta", (req, res) => {
-  fetch("https://powertop.home.jimmysawczuk.net/api/meta")
+  fetch(`${baseURL}/api/meta`)
     .then((response) => response.json())
     .then((response) => res.send(response))
 })
