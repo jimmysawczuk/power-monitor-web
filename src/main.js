@@ -1,7 +1,5 @@
 import highcharts from "highcharts"
 import timeagoFactory from "timeago.js"
-import { library, dom } from "@fortawesome/fontawesome-svg-core"
-import { faBatteryBolt } from "@fortawesome/pro-regular-svg-icons"
 import { distanceInWords } from "date-fns"
 
 import "./main.less"
@@ -29,9 +27,6 @@ timeagoFactory.register("local", function (number, index) {
 
 const timeago = timeagoFactory()
 timeago.setLocale("local")
-
-library.add(faBatteryBolt)
-dom.i2svg()
 
 highcharts.setOptions({
   chart: {
