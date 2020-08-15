@@ -12,6 +12,12 @@ app.get("/api/snapshots", (req, res) => {
     .then((response) => res.send(response))
 })
 
+app.get("/api/meta", (req, res) => {
+  fetch("https://powertop.home.jimmysawczuk.net/api/meta")
+    .then((response) => response.json())
+    .then((response) => res.send(response))
+})
+
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`)
 })

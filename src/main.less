@@ -87,18 +87,17 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
+  background: #f5f5f5;
+  font-size: 0.85rem;
 
   .container {
     display: flex;
-  }
 
-  // height: 50px;
-  background-color: #f5f5f5;
-  font-size: 0.85rem;
-
-  .bumper {
-    padding: 16px 0px;
-    line-height: 1.2em;
+    .panel {
+      flex: 0 0 50%;
+      line-height: 1.2em;
+      padding: 1.2em 0;
+    }
   }
 
   .text-right {
@@ -108,38 +107,41 @@ body {
 
 @media (max-width: @screen-sm-max) {
   body {
-    margin-bottom: 0px;
+    padding-bottom: 0px;
   }
 
   .footer {
     position: relative;
-    height: auto;
+    bottom: auto;
+    margin-top: 2em;
 
-    .divider {
-      display: none;
-    }
-
-    span {
+    .container {
       display: block;
-    }
 
-    .bumper {
-      text-align: center;
+      .panel {
+        text-align: center;
+        padding: 0;
 
-      padding-bottom: 0px;
-      padding-top: 0px;
+        span {
+          display: block;
+        }
 
-      &:first-child {
-        padding-top: 16px;
+        .divider {
+          display: none;
+        }
       }
 
-      &:last-child {
-        padding-bottom: 16px;
+      .panel:first-child {
+        padding-top: 1em;
       }
-    }
 
-    .text-right {
-      text-align: center;
+      .panel:last-child {
+        padding-bottom: 1em;
+      }
+
+      .panel.text-right {
+        text-align: center !important;
+      }
     }
   }
 }
