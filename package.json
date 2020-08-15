@@ -39,9 +39,9 @@
     "highcharts": "^6.0.7"
   },
   "scripts": {
-    "revision": "scm-status -out public/REVISION.json",
-    "build": "rm -rf public && mkdir -p public && yarn revision && cp -r static/* public && tmpl && webpack --mode=production",
-    "dev": "rm -rf public && mkdir -p public && yarn revision && cp -r static/* public && tmpl -w -- webpack -w --mode=development",
+    "revision": "scm-status -out REVISION.json",
+    "build": "rm -rf public && mkdir -p public && yarn revision && cp REVISION.json public/ && cp -r static/* public && tmpl && webpack --mode=production",
+    "dev": "rm -rf public && mkdir -p public && yarn revision && cp REVISION.json public/ && cp -r static/* public && tmpl -w -- webpack -w --mode=development",
     "prettier": "prettier --write .babelrc .prettierrc *.json src/*"
   }
 }
