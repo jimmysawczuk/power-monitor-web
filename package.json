@@ -36,7 +36,7 @@
     "webpack": "^4.44.1"
   },
   "dependencies": {
-    "highcharts": "^6.0.7"
+    "highcharts": "^7.2.2"
   },
   "scripts": {
     "revision": "scm-status -out REVISION.json",
