@@ -1,12 +1,15 @@
 import highcharts from "highcharts"
-import timeagoFactory from "timeago.js"
-import { distanceInWords } from "date-fns"
+import { render as timeagoRender, register } from "timeago.js"
+import { formatDistance } from "date-fns"
+import "./fa"
 
-import "./main.less"
+import "~/bootstrap/scss/bootstrap.scss"
+import "~/highcharts/css/highcharts.scss"
+import "./main.scss"
 
 let baseURL = ""
 
-timeagoFactory.register("local", function (number, index) {
+register("local", function (number, index) {
   return [
     ["a moment ago", "in a moment"],
     ["a moment ago", "in a moment"],
@@ -25,20 +28,8 @@ timeagoFactory.register("local", function (number, index) {
   ][index]
 })
 
-const timeago = timeagoFactory()
-timeago.setLocale("local")
-
-highcharts.setOptions({
-  chart: {
-    style: {
-      fontFamily:
-        '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
-    },
-  },
-})
-
 function humanizeDuration(d) {
-  return `${distanceInWords(+new Date(), +new Date() - d)} ago`
+  return `${formatDistance(new Date(), new Date() - d)} ago`
 }
 
 function updateModel(snapshot) {
@@ -73,6 +64,14 @@ function updateUtilityVoltage(snapshot) {
 
 function getDefaultChartOptions() {
   return {
+    chart: {
+      styledMode: true,
+    },
+
+    credits: {
+      enabled: false,
+    },
+
     xAxis: {
       labels: {
         formatter() {
@@ -83,6 +82,10 @@ function getDefaultChartOptions() {
 
     legend: {
       enabled: false,
+    },
+
+    title: {
+      style: {},
     },
 
     plotOptions: {
@@ -104,12 +107,12 @@ function drawBatteryRemainingChart(snapshots) {
   highcharts.chart({
     ...getDefaultChartOptions(),
     chart: {
+      ...getDefaultChartOptions().chart,
       renderTo: "battery-remaining-chart",
     },
     title: {
       text: "Battery remaining",
     },
-
     yAxis: {
       tickInterval: 0.2,
       endOnTick: false,
@@ -146,6 +149,7 @@ function drawLoadChart(snapshots) {
   highcharts.chart({
     ...getDefaultChartOptions(),
     chart: {
+      ...getDefaultChartOptions().chart,
       renderTo: "load-chart",
     },
     title: {
@@ -186,6 +190,7 @@ function drawRemainingRuntimeChart(snapshots) {
   highcharts.chart({
     ...getDefaultChartOptions(),
     chart: {
+      ...getDefaultChartOptions().chart,
       renderTo: "remaining-runtime-chart",
     },
 
@@ -227,6 +232,7 @@ function drawUtilityVoltageChart(snapshots) {
   highcharts.chart({
     ...getDefaultChartOptions(),
     chart: {
+      ...getDefaultChartOptions().chart,
       renderTo: "utility-voltage-chart",
     },
 
@@ -264,7 +270,7 @@ function setMonitoringStartTime(startTime) {
     "started",
   ).innerHTML = `Monitoring started <time datetime="${startTime}" />`
 
-  timeago.render(document.getElementsByTagName("time"))
+  timeagoRender(document.querySelectorAll("time"), "local")
 }
 
 function setFrontendRevision(revision) {
@@ -322,7 +328,7 @@ function update() {
         "last-updated",
       ).innerHTML = `Last updated <time datetime="${latest.timestamp}" />`
 
-      timeago.render(document.getElementsByTagName("time"))
+      timeagoRender(document.querySelectorAll("time"), "local")
     })
 }
 

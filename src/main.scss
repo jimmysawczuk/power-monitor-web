@@ -1,0 +1,262 @@
+@mixin dark-mode() {
+  @if ("#{&}"=="html"or"#{&}"==":root") {
+    @at-root html.dark-mode {
+      @content;
+    }
+  } @else {
+    @at-root html.dark-mode & {
+      @content;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+$dark-mode-timer: 0.2s;
+$screen-sm-max: 540px;
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans,
+  Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+
+:root {
+  --background-color: #fff;
+  --text-color: #333;
+  --header-background-color: #393939;
+  --footer-background-color: #fff;
+  --gridline-color: #aaa;
+
+  @include dark-mode() {
+    --background-color: #222;
+    --text-color: #eee;
+    --header-background-color: #111;
+    --footer-background-color: #222;
+    --gridline-color: #444;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  position: relative;
+  min-height: calc(100vh);
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color $dark-mode-timer, color $dark-mode-timer;
+  padding-bottom: 75px;
+  font-family: $font-family;
+}
+
+.navbar {
+  margin-bottom: 2em;
+  background: var(--header-background-color);
+  transition: background-color $dark-mode-timer;
+  // height: 60px;
+  font-size: 1rem;
+  border-radius: 0;
+  border: 0;
+
+  .logo {
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+
+    .brand {
+      border: 1px solid #111;
+      background: #111;
+      color: #ccff00;
+      border-radius: 50%;
+      height: 3em;
+      width: 3em;
+      text-align: center;
+      display: inline-block;
+      vertical-align: middle;
+
+      img {
+        display: block;
+        margin: 0.5em auto;
+        height: (3em - 0.5 * 2);
+      }
+    }
+
+    .title {
+      display: inline-block;
+      height: 2em;
+      line-height: 2em;
+      vertical-align: middle;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.snapshots {
+  margin: 3em auto;
+  font-size: 1em;
+
+  h1 {
+    font-size: 3em;
+    font-weight: 300;
+
+    small {
+      font-size: 0.6em;
+      font-weight: 200;
+    }
+  }
+}
+
+.highcharts-container {
+  font-family: $font-family;
+
+  .highcharts-background {
+    fill: transparent;
+  }
+
+  .highcharts-title {
+    fill: var(--text-color);
+    transition: fill $dark-mode-timer;
+  }
+
+  .highcharts-xaxis-labels,
+  .highcharts-yaxis-labels {
+    text {
+      fill: var(--text-color);
+      transition: fill $dark-mode-timer;
+    }
+  }
+
+  .highcharts-yaxis .highcharts-axis-title {
+    display: none;
+  }
+
+  .highcharts-yaxis-grid .highcharts-grid-line {
+    stroke: var(--gridline-color);
+    transition: stroke $dark-mode-timer;
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: var(--footer-background-color);
+  transition: background-color $dark-mode-timer;
+  font-size: 0.85rem;
+
+  .container {
+    display: flex;
+
+    .panel {
+      flex: 0 0 50%;
+      line-height: 1.2em;
+      padding: 1.2em 0;
+    }
+  }
+
+  .text-right {
+    text-align: right;
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  body {
+    padding-bottom: 0px;
+  }
+
+  .footer {
+    position: relative;
+    bottom: auto;
+    margin-top: 2em;
+
+    .container {
+      display: block;
+
+      .panel {
+        text-align: center;
+        padding: 0;
+
+        span {
+          display: block;
+        }
+
+        .divider {
+          display: none;
+        }
+      }
+
+      .panel:first-child {
+        padding-top: 1em;
+      }
+
+      .panel:last-child {
+        padding-bottom: 1em;
+      }
+
+      .panel.text-right {
+        text-align: center !important;
+      }
+    }
+  }
+}
+
+.snapshot {
+  text-align: center;
+
+  h1 {
+    small {
+      display: block;
+    }
+  }
+}
+
+#dark-mode-switch {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: var(--dark-mode-switch-icon-height, 17px);
+  z-index: 200;
+
+  @media (prefers-color-scheme: dark) {
+    display: none;
+  }
+
+  button {
+    border: 0;
+    background: transparent;
+    transition: color 0.3s;
+    color: var(--text-color);
+    height: var(--dark-mode-switch-height, 40px);
+    padding: var(--dark-mode-switch-padding, 5px 10px);
+    cursor: pointer;
+  }
+
+  .fa-moon {
+    display: none;
+  }
+
+  .fa-sun {
+    display: block;
+  }
+
+  @include dark-mode() {
+    .fa-moon {
+      display: block;
+    }
+
+    .fa-sun {
+      display: none;
+    }
+  }
+}

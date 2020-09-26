@@ -15,8 +15,18 @@
     <meta name="msapplication-TileColor" content="#333333" />
     <meta name="theme-color" content="#ffffff" />
     <link rel="stylesheet" href="/dist/main.css" type="text/css" />
+    <script>
+      {{- file  "public/dist/dark-mode.js" | safeJS -}}
+    </script>
   </head>
   <body>
+    <div id="dark-mode-switch">
+      <button id="dark-mode-switch-btn">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+
     <nav class="navbar navbar-default">
       <div class="logo">
         <span class="brand">
@@ -86,7 +96,7 @@
     <script>
       PowerMonitor.startup(window, document, {
         interval: 30000,
-        baseURL: "",
+        baseURL: "http://localhost:3000",
         frontendRevision: {{ with getJSON "REVISION.json" -}}
         {
           rev: {{ index . "hex" "short" }},

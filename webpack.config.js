@@ -11,6 +11,11 @@ const config = {
   entry: {
     main: "./src/main.js",
   },
+  resolve: {
+    alias: {
+      "~": path.resolve("node_modules"),
+    },
+  },
   output: {
     path: path.resolve(__dirname, "public/dist"),
     filename: "[name].js",
@@ -33,14 +38,14 @@ const config = {
         ],
       },
       {
-        test: /\.less$/,
+        test: /\.scss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           { loader: "css-loader" },
           { loader: "postcss-loader" },
-          { loader: "less-loader" },
+          { loader: "sass-loader" },
         ],
       },
       {
