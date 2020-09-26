@@ -25,6 +25,7 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans
   --header-background-color: #393939;
   --footer-background-color: #fff;
   --gridline-color: #aaa;
+  --link-color: #007bff;
 
   @include dark-mode() {
     --background-color: #222;
@@ -32,6 +33,7 @@ $font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans
     --header-background-color: #111;
     --footer-background-color: #222;
     --gridline-color: #444;
+    --link-color: #a3cc00;
   }
 }
 
@@ -56,6 +58,15 @@ body {
   transition: background-color $dark-mode-timer, color $dark-mode-timer;
   padding-bottom: 75px;
   font-family: $font-family;
+}
+
+a {
+  &,
+  &:visited,
+  &:hover {
+    color: var(--link-color);
+    transition: color $dark-mode-timer;
+  }
 }
 
 .navbar {
@@ -144,6 +155,17 @@ body {
   .highcharts-yaxis-grid .highcharts-grid-line {
     stroke: var(--gridline-color);
     transition: stroke $dark-mode-timer;
+  }
+
+  .highcharts-color-0 {
+    transition: fill $dark-mode-timer, stroke $dark-mode-timer;
+  }
+
+  @include dark-mode() {
+    .highcharts-color-0 {
+      fill: #a3cc00;
+      stroke: #a3cc00;
+    }
   }
 }
 
