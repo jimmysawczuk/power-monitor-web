@@ -40,7 +40,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
-    "highcharts": "^8.2.0"
+    "highcharts": "^9.0.0"
   },
   "scripts": {
     "dark-mode": "babel --presets @babel/preset-env -o public/dist/dark-mode.js --minified src/dark-mode.js",
