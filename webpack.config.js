@@ -1,12 +1,12 @@
 const path = require("path")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const TerserJSPlugin = require("terser-webpack-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const CSSMinimizerPlugin = require("css-minimizer-webpack-plugin")
 
 const config = {
   plugins: [new MiniCssExtractPlugin()],
   optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    minimizer: [new TerserJSPlugin({}), new CSSMinimizerPlugin({})],
   },
   entry: {
     main: "./src/main.js",
@@ -21,6 +21,7 @@ const config = {
     filename: "[name].js",
     library: "PowerMonitor",
     libraryTarget: "window",
+    publicPath: "",
   },
   module: {
     rules: [
